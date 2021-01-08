@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text } from './index';
+import { Text } from './';
 import {Colors} from "../styling";
 
 interface IProps {
@@ -18,5 +18,4 @@ export const Header = ({ title }: IProps) => {
             <Text style={headerStyle.title} bold>{title}</Text>
         </View>
         )
-
 }
