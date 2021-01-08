@@ -17,7 +17,7 @@ export const TransactionDetails = ({ route, navigation }) => {
             <Header title="Transaction Details" onBack={goBack}/>
             <ScrollView>
                 {Object.keys(transaction).map((key, index) =>
-                    (<View style={[detailStyles.itemContainer, { marginTop: index === 0 ? 0 : 2}]}>
+                    (<View style={[detailStyles.itemContainer, { marginTop: index === 0 ? 0 : 2}]} key={key + transaction[key]}>
                     <Text bold style={detailStyles.text}>
                         {key}
                     </Text>

@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
-import { Text } from './';
+import { Text } from './Text';
 import {Colors} from "../styling";
 
 interface IProps {
@@ -11,8 +11,8 @@ interface IProps {
 }
 
 const btnStyles = StyleSheet.create({
-    container: { height: 50, backgroundColor: Colors.lightBlue, justifyContent: 'center', alignItems: 'center', minWidth: 180, borderRadius: 6 },
-    title: { color: Colors.white },
+    container: { height: 50, backgroundColor: Colors.lightBlue, justifyContent: 'center', alignItems: 'center', maxWidth: 180, borderRadius: 6 },
+    title: { color: Colors.white, marginHorizontal: 30 },
     disabled: { backgroundColor: Colors.btnDisabled }
 })
 

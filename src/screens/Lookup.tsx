@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import API from 'etherscan-api';
-import {View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, FlatList, TouchableOpacity, ScrollView} from 'react-native';
 import {ScreenView, Spinner} from "../components/";
 import { Colors } from "../styling";
 import { Button, Header, Text, Input } from "../components";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { DETAILS } from "../constants/screens";
+import { useIsFocused } from '@react-navigation/native';
 
 
 const lookupStyles = StyleSheet.create({
@@ -45,7 +46,9 @@ interface ITransaction {
     value: number;
 }
 
-export const Lookup = ({ navigation }) => {
+export const Lookup = ({ navigation, route }) => {
+    const qrAddress= route?.params?.qrAddress;
+    const isFocused = useIsFocused();
     const [address, setAddress] = useState('');
     const [transactions, setTransactions] = useState([]);
     const [isLoading, setLoadingStatus] = useState(false);
@@ -53,9 +56,12 @@ export const Lookup = ({ navigation }) => {
 
     const onChange = (value: string) => setAddress(value);
 
-    const onLookup = async () => {
+    const onLookup = async (QRAddress?: string) => {
             switchLoadingStatus(true);
-            api.account.txlist(address, 1, 'latest', 1, 100, 'desc').then((r: { result: [] }) => {
+            if (transactions.length !== 0 ) {
+               setTransactions([]);
+            }
+        api.account.txlist(QRAddress ? QRAddress : address, 1, 'latest', 1, 100, 'desc').then((r: { result: [] }) => {
                 setTransactions(r.result);
                 switchLoadingStatus(false);
             }).catch((e: string) => {
@@ -76,9 +82,16 @@ export const Lookup = ({ navigation }) => {
         </TouchableOpacity>)
     }
 
+    useEffect( () => {
+        if (qrAddress && qrAddress !== address && isFocused) {
+            onChange(qrAddress);
+            onLookup(qrAddress).then(() => console.log('transactions were fetched')).catch((e) => console.log(e));
+        }
+    }, [isFocused]);
+
     return (<ScreenView statusBarColor={Colors.black} navigationMenuColor={Colors.darkblue} barStyle="light-content">
         <Header title="Coinhouse Etherscan" />
-        <View style={lookupStyles.container}>
+        <ScrollView contentContainerStyle={lookupStyles.container}   keyboardShouldPersistTaps='handled'>
             <View style={lookupStyles.headerContainer}>
                 <Text style={lookupStyles.txt}>Please enter a valid ethereum address:</Text>
                 <View style={lookupStyles.input}>
@@ -98,7 +111,7 @@ export const Lookup = ({ navigation }) => {
                     </>
                 )
             }
-        </View>
+        </ScrollView>
         <Spinner visible={isLoading} />
     </ScreenView>)
 };
