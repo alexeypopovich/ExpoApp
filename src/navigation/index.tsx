@@ -4,6 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Lookup, QRScan } from "../screens";
 import { Ionicons } from '@expo/vector-icons';
 import {Colors} from "../styling";
+import { TransactionDetails } from "../screens/TransactionDetails";
+import { DETAILS, LOOKUP, MAIN, QRSCAN } from "../constants/screens";
 
 const MainStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -27,14 +29,15 @@ const Tabs = () => (
             inactiveTintColor: Colors.inactiveGray,
             style: { backgroundColor: Colors.black, paddingHorizontal: 10 },
         }}>
-        <Tab.Screen name="Lookup" component={Lookup} />
-        <Tab.Screen name="QRScan" component={QRScan} />
+        <Tab.Screen name={LOOKUP} component={Lookup} />
+        <Tab.Screen name={QRSCAN} component={QRScan} />
     </Tab.Navigator>
 )
 
 export const NavigationStack = () => (
     <MainStack.Navigator headerMode="none">
-        <MainStack.Screen name="Main" component={Tabs} />
+        <MainStack.Screen name={MAIN} component={Tabs} />
+        <MainStack.Screen name={DETAILS} component={TransactionDetails} />
     </MainStack.Navigator>
 
 )

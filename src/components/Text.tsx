@@ -10,9 +10,9 @@ interface IProps {
 
 export const Text = (props: IProps) => {
     const { children, bold, style, onPress } = props;
-    const fontWeight = { fontWeight: bold ? '600' : '400' };
+    const fontWeight = { fontWeight: bold ? '700' : '400' };
     return (
-        <TextRN {...props} style={[style, fontWeight]} onPress={onPress}>
+        <TextRN {...props} style={[{ color: 'white' },style, fontWeight]} onPress={onPress}>
             {children}
         </TextRN>
     );

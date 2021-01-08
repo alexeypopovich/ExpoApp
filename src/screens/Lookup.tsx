@@ -5,6 +5,7 @@ import {ScreenView, Spinner} from "../components/";
 import { Colors } from "../styling";
 import { Button, Header, Text, Input } from "../components";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { DETAILS } from "../constants/screens";
 
 
 const lookupStyles = StyleSheet.create({
@@ -44,7 +45,7 @@ interface ITransaction {
     value: number;
 }
 
-export const Lookup = () => {
+export const Lookup = ({ navigation }) => {
     const [address, setAddress] = useState('');
     const [transactions, setTransactions] = useState([]);
     const [isLoading, setLoadingStatus] = useState(false);
@@ -64,8 +65,9 @@ export const Lookup = () => {
     };
 
     const renderItem = ({ item }: { item: ITransaction }) => {
+        const onOpen = () => navigation.navigate(DETAILS, { transaction: item });
         return (
-        <TouchableOpacity style={lookupStyles.listItem}>
+        <TouchableOpacity style={lookupStyles.listItem} onPress={onOpen} key={item.timeStamp}>
             <MaterialCommunityIcons name="transit-transfer" size={24} color={Colors.white} />
             <View style={lookupStyles.txtContainer}>
                 <Text style={lookupStyles.value} bold>{`${item.value} ETH`}</Text>
