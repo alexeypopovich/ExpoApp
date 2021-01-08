@@ -1,30 +1,14 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { Text } from "./Text";
 import { Colors } from "../styling";
 import { Ionicons } from "@expo/vector-icons";
+import { headerStyle } from "../styling/components/Header";
 
 interface IProps {
   title: string;
   onBack?: () => void;
 }
-
-const headerStyle = StyleSheet.create({
-  container: {
-    height: 60,
-    backgroundColor: Colors.black,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: { color: Colors.white, fontSize: 18 },
-  backBtn: {
-    position: "absolute",
-    left: 10,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  backTxt: { color: Colors.lightBlue, fontSize: 16 },
-});
 
 export const Header = ({ title, onBack }: IProps) => {
   return (

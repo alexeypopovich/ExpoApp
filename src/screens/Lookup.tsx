@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "etherscan-api";
-import { View, StyleSheet, FlatList, TouchableOpacity, ScrollView } from "react-native";
+import { View, FlatList, TouchableOpacity, ScrollView } from "react-native";
 import { ScreenView, Spinner } from "../components/";
 import { Colors } from "../styling";
 import { Button, Header, Text, Input } from "../components";
@@ -10,38 +10,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { MainStackParamList } from "../navigation";
 import { RouteProp } from "@react-navigation/native";
-
-const lookupStyles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.darkblue },
-  headerContainer: {
-    marginHorizontal: 30,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  txt: {
-    color: Colors.white,
-    marginVertical: 15,
-    textAlign: "center",
-    fontSize: 12,
-  },
-  input: { width: "100%", marginBottom: 15 },
-  listItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 10,
-    backgroundColor: Colors.inputBG,
-  },
-  txtContainer: { marginLeft: 10 },
-  receiver: { color: Colors.white, fontSize: 12 },
-  value: { color: Colors.white },
-  title: {
-    textAlign: "center",
-    color: Colors.white,
-    backgroundColor: Colors.inputBG,
-    paddingVertical: 15,
-    marginTop: 20,
-  },
-});
+import { lookupStyles } from "../styling/screens/Lookup";
 
 const api = API.init("5U232ARFN9ZJ74P4TH7G1ZFSPQJNJ49R4Q");
 
@@ -124,7 +93,7 @@ export const Lookup = ({ navigation, route }: { navigation: StackNavigationProp<
         <View style={lookupStyles.headerContainer}>
           <Text style={lookupStyles.txt}>Please enter a valid ethereum address:</Text>
           <View style={lookupStyles.input}>
-            <Input onChangeText={onChange} value={address} />
+            <Input onChangeText={onChange} value={address} placeholder="Ex: 0xf7eB7637DeD2696B152c7D5EDEe502902B0F1c91" />
           </View>
           <Button onPress={onLookup} title="Lookup" disabled={address.length === 0} />
         </View>

@@ -5,15 +5,7 @@ import { Colors } from "../styling";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { MainStackParamList } from "../navigation";
 import { RouteProp } from "@react-navigation/native";
-
-const detailStyles = StyleSheet.create({
-  itemContainer: {
-    paddingHorizontal: 15,
-    backgroundColor: Colors.inputBG,
-    paddingVertical: 10,
-  },
-  text: { fontSize: 12 },
-});
+import { detailStyles } from "../styling/screens/TransactionDetails";
 
 export const TransactionDetails = ({ route, navigation }: { route: RouteProp<MainStackParamList, "TransactionDetails">; navigation: StackNavigationProp<MainStackParamList> }) => {
   const { params } = route;

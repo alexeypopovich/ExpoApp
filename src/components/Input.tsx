@@ -1,26 +1,13 @@
 import React from "react";
-import { TextInput, StyleSheet } from "react-native";
+import { TextInput } from "react-native";
 import { Colors } from "../styling";
+import { inputStyle } from "../styling/components/Input";
 
 interface IProps {
   onChangeText?: (value: string) => void;
   value?: string;
+  placeholder?: string;
 }
-
-const inputStyle = StyleSheet.create({
-  input: {
-    padding: 0,
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    paddingTop: 12,
-    paddingBottom: 14,
-    width: "100%",
-    fontSize: 16,
-    lineHeight: 22,
-    backgroundColor: Colors.inputBG,
-  },
-});
 
 export const Input = (props: IProps) => {
   return (
@@ -35,6 +22,7 @@ export const Input = (props: IProps) => {
         ...inputStyle.input,
         color: Colors.white,
       }}
+      placeholderTextColor="lightgray"
       onChangeText={props.onChangeText}
     />
   );

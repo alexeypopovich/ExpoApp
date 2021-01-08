@@ -7,17 +7,8 @@ import { Text, Button } from "../components";
 import { LOOKUP } from "../constants/screens";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { MainStackParamList } from "../navigation";
+import { qrscanStyles } from "../styling/screens/QRScan";
 
-const qrscanStyles = StyleSheet.create({
-  container: { flex: 1 },
-  address: { marginVertical: 10, textAlign: "center" },
-  buttonContainer: {
-    flexDirection: "row",
-    paddingVertical: 20,
-    justifyContent: "space-evenly",
-    backgroundColor: Colors.inputBG,
-  },
-});
 
 export const QRScan = ({ navigation }: { navigation: StackNavigationProp<MainStackParamList> }) => {
   const [hasPermission, setHasPermission] = useState(null);
