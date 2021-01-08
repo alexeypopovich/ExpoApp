@@ -19,7 +19,7 @@ const btnStyles = StyleSheet.create({
 export const Button = ({ onPress, title, style, disabled = false }: IProps) => {
     const titleColor = { color: disabled ? Colors.inactiveGray : Colors.white };
     return (
-        <TouchableOpacity style={[btnStyles.container, disabled && btnStyles.disabled]} disabled={disabled}>
+        <TouchableOpacity onPress={onPress} style={[btnStyles.container, disabled && btnStyles.disabled]} disabled={disabled}>
             <Text style={[btnStyles.title, titleColor]} bold>{title}</Text>
         </TouchableOpacity>
     );
